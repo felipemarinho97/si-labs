@@ -6,6 +6,8 @@ angular.module('musicoteca', [
   'ngResource',
 
   // interno
-  'artistInput'
+  'artistInput',
+  'artistBox',
+  'navBar'
 
 ]);

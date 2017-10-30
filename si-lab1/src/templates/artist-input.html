@@ -1,6 +1,22 @@
-Adicione um novo artista:
-</br>
-Nome: <input type="text" ng-model='name'></br>
-Imagem: <input type="image" ng-model='image'></br>
+<style>
 
-<button>Adicionar artista</button>
+artist-box {
+  box-shadow: 10px solid black;
+}
+
+.box {
+  position: absolute;
+}
+
+</style>
+
+<div class="box">
+  Adicione um novo artista:
+  </br>
+  Nome:     <input type="text" ng-model='artist.name'></br>
+  Imagem:   <input type="text" ng-model="artist.imagemSrc" accept="image/x-png,image/gif,image/jpeg"/></br>
+
+  <button ng-click="createNewArtist()">Adicionar artista</button>
+
+  <artist-box artist='artist'></artist-box>
+</div>

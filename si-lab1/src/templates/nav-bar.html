@@ -1,0 +1,13 @@
+<style>
+ul {
+  display: inline-block;
+  float: none;
+  max-height: 10px;
+}
+</style>
+
+<ul>
+  <li ng-repeat="item in items">
+    <a ng-href="/{{item.id}}">{{item.title}}</a>
+  </li>
+</ul>

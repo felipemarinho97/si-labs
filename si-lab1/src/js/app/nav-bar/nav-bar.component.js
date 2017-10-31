@@ -5,19 +5,19 @@ angular.module('navBar').
     templateUrl: '/templates/nav-bar.html',
     controller: function($scope) {
       var items =  [{
-        title: "Adicionar Artista",
+        title: "Artistas",
         id: 0
       },
       {
-        title: "Adicionar Música",
+        title: "Músicas",
         id: 1
       },
       {
-        title: "Pesquisar Artistas",
+        title: "Playlists",
         id: 2
       },
       {
-        title: "Adicionar Playlist",
+        title: "Pesquisar",
         id: 3
       }];
 

@@ -6,9 +6,11 @@ angular.module('artistBox').
       scope: {
         artist: "=artist"
       },
-      template: "<h2>{{artist.name}}</h2> <span ><img ng-src='{{artist.imagemSrc}}' height='150px'>",
+      template: "<div class='card' style='width: 20rem;'><img class='card-img-top' ng-src='{{artist.imagemSrc}}'><div class='card-block p-2'><h4 class='card-title'>{{artist.name}}</h4></div></div>",
       link: function(scope, element, attr) {
-        console.log(scope.artist)
+        if (scope.artist.imagemSrc === '' || !scope.artist.imagemSrc) {
+          scope.artist.imagemSrc = "/images/blank_artist.png";
+        }
       }
     }
   })

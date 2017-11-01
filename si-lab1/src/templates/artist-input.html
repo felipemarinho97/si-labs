@@ -10,13 +10,25 @@ artist-box {
 
 </style>
 
-<div class="box">
-  Adicione um novo artista:
-  </br>
-  Nome:     <input type="text" ng-model='artist.name'></br>
-  Imagem:   <input type="text" ng-model="artist.imagemSrc" accept="image/x-png,image/gif,image/jpeg"/></br>
+<div class="container box">
+  <div class="row">
+    <div class="col">
+      <div class="h2 form-title">Adicione um novo artista:</div>
+      </br>
 
-  <button ng-click="createNewArtist()">Adicionar artista</button>
+      <form>
+        <label for="nome">Nome</label>     <input class="form-control" type="text" id="nome" ng-model='artist.name'></br>
+        <label for="imagem">Imagem</label>   <input class="form-control" type="text" id="imagem" ng-model="artist.imagemSrc" accept="image/x-png,image/gif,image/jpeg"/></br>
+      </form>
 
-  <artist-box artist='artist'></artist-box>
+      <div class="btn btn-primary" ng-click="createNewArtist()">
+      Adicionar artista
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="h3">Preview:</div>
+      <artist-box artist='artist'></artist-box>
+    </div>
+  </div>
 </div>

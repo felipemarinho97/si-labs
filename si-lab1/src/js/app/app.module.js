@@ -8,6 +8,7 @@ angular.module('musicoteca', [
   // interno
   'artistInput',
   'artistBox',
-  'navBar'
+  'navBar',
+  'artistGrid'
 
 ]);

@@ -11,10 +11,16 @@ angular.module('musicoteca').
             })
 
           $routeProvider.
-              when("/0", {
+              when("/artist", {
                   template: "<artist-input></artist-input>"
               }).
-              when("/1", {
+              when("/music", {
+                  template: "<music-input></music-input>"
+              }).
+              when("/artist/:name", {
+                  template: "<artist-profile></artist-profile>"
+              }).
+              when("/search", {
                   template: "<artist-grid></artist-grid>"
               }).
               otherwise({

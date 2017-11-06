@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('artistInput', [])
+angular.module('artistInput', ['data'])
   .directive("fileread", [function () {
     return {
         scope: {

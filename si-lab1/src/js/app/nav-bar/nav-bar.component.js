@@ -6,19 +6,19 @@ angular.module('navBar').
     controller: function($scope) {
       var items =  [{
         title: "Artistas",
-        id: 0
+        id: 'artist'
       },
       {
         title: "Músicas",
-        id: 1
+        id: 'music'
       },
       {
         title: "Playlists",
-        id: 2
+        id: 'playlist'
       },
       {
         title: "Pesquisar",
-        id: 3
+        id: 'search'
       }];
 
       $scope.items = items;

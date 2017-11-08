@@ -4,7 +4,7 @@ angular.module('artistInput').
   component('artistInput', {
     templateUrl: '/templates/artist-input.html',
     styleUrls: ['/css/artist-input.component.css'],
-    controller: function(Data, $scope, $rootScope) {
+    controller: function(Data, $scope, $rootScope, $compile) {
 
       function clone(obj) {
           if (null == obj || "object" != typeof obj) return obj;
@@ -28,13 +28,13 @@ angular.module('artistInput').
 
       $scope.createNewArtist = function() {
         if ($scope.artist.name === '') {
-          alert("Nome do artista obrigatório");
+          angular.element($("#alert-placeholder")).append($compile("<alert type='alert-dangertava' message='Nome do artista obrigatório!'></alert>")($scope));
         } else if (Data.getArtist($scope.artist.name)) {
-          alert("Artista já existe");
+          angular.element($("#alert-placeholder")).append($compile("<alert type='alert-warning' message='"+$scope.artist.name+" já existe!'></alert>")($scope));
         } else {
           Data.putArtist(clone($scope.artist));
 
-          $('#alert-placeholder').append('<div id="alertdiv" class="alert alert-success alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span>'+$scope.artist.name+' adiciondo com sucesso!</span></div>');
+          angular.element($("#alert-placeholder")).append($compile("<alert type='alert-success' message='"+$scope.artist.name+" adicionado com sucesso!'></alert>")($scope));
 
           $scope.artist.name = "";
           $scope.artist.imagemSrc = "/images/blank_artist.png";

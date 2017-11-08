@@ -36,7 +36,7 @@ angular.module('musicInput').
         } else if (Data.getMusic($scope.music)) {
           alert("Música já existe");
         } else {
-          console.log(clone($scope.music));
+
           Data.putMusic(clone($scope.music));
 
           // $scope.artist.name = "";

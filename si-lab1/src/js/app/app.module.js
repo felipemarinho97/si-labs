@@ -2,8 +2,9 @@
 
 angular.module('musicoteca', [
   // externo
-  'ngRoute',
+  // 'ngRoute',
   'ngResource',
+  'ui.router',
   'angular-rating-icons',
   'infinite-scroll',
 
@@ -13,6 +14,7 @@ angular.module('musicoteca', [
   'navBar',
   'artistGrid',
   'musicInput',
-  'artistProfile'
+  'artistProfile',
+  'alert'
 
 ]);

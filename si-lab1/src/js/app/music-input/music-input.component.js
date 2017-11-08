@@ -4,7 +4,7 @@ angular.module('musicInput').
   component('musicInput', {
     templateUrl: '/templates/music-input.html',
     styleUrls: ['/css/music-input.component.css'],
-    controller: function(Data, $scope, $rootScope) {
+    controller: function(Data, $scope, $rootScope, $compile) {
 
       function clone(obj) {
           if (null == obj || "object" != typeof obj) return obj;
@@ -13,6 +13,21 @@ angular.module('musicInput').
               if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
           }
           return copy;
+      }
+
+      let alert = function(type, message) {
+        if ($("#alert-placeholder alert").length >= 3) {
+          $("#alert-placeholder alert").last().remove();
+        }
+        angular.element($("#alert-placeholder")).prepend($compile("<alert type='"+type+"' message='"+message+"'></alert>")($scope));
+      }
+
+      let check = function(atribute) {
+        if (atribute === '') {
+          alert("danger", "Por favor, preencha os campos indicados.");
+          return true;
+        }
+        return false;
       }
 
       $scope.music = {
@@ -31,18 +46,17 @@ angular.module('musicInput').
       }
 
       $scope.createNewMusic = function() {
-        if ($scope.music.name === '') {
-          alert("Nome da muisca obrigatório");
+        if (check($scope.music.name) || check($scope.music.artist) ||
+        check($scope.music.album) || check($scope.music.anoDeLancamento) ||
+        check($scope.music.duracao)) {
+
         } else if (Data.getMusic($scope.music)) {
-          alert("Música já existe");
+          alert("warning", "Música já existe");
         } else {
 
-          Data.putMusic(clone($scope.music));
+          Data.putMusic(angular.copy($scope.music));
 
-          // $scope.artist.name = "";
-          // $scope.artist.imagemSrc = "/images/blank_artist.png";
-
-          alert("Adiconado!");
+          alert("success", $scope.music.name + " - " + $scope.music.artist + " adiconado!");
         }
       }
     }

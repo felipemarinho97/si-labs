@@ -21,19 +21,17 @@ angular.module('musicoteca').
                   template: "<music-input></music-input>"
               }).
               state("profile", {
-                  abstract: true,
-                  url: "/artist",
-                  template: "<artist-profile></artist-profile><div ui-view></div>",
+                  url: "/artist/:name",
+                  template: "<artist-profile></artist-profile>",
                   resolve: {
                     artista: ($stateParams) => {
                       // recupera o artista $stateParams.name
                     }
                   }
               }).
-              state("artistProfileAlbums", {
-                url: "/artist/:name/albums",
-                parent: "profile",
-                component: "artistGrid"
+              state("profile.albums", {
+                url: "/albums",
+                component: "artistInput"
               }).
               state("search", {
                     url: "/search",
@@ -44,6 +42,6 @@ angular.module('musicoteca').
                   template: "Not Found"
               });
 
-          $urlRouterProvider.otherwise("/404");
+          // $urlRouterProvider.otherwise("/404");
 
 });

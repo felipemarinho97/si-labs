@@ -26,15 +26,22 @@ angular.module('artistInput').
         $(element).hide();
       }
 
+      let alert = function(type, message) {
+        if ($("#alert-placeholder alert").length >= 3) {
+          $("#alert-placeholder alert").last().remove();
+        }
+        angular.element($("#alert-placeholder")).prepend($compile("<alert type='"+type+"' message='"+message+"'></alert>")($scope));
+      }
+
       $scope.createNewArtist = function() {
         if ($scope.artist.name === '') {
-          angular.element($("#alert-placeholder")).append($compile("<alert type='alert-dangertava' message='Nome do artista obrigatório!'></alert>")($scope));
+          alert("danger", 'Nome do artista obrigatório!');
         } else if (Data.getArtist($scope.artist.name)) {
-          angular.element($("#alert-placeholder")).append($compile("<alert type='alert-warning' message='"+$scope.artist.name+" já existe!'></alert>")($scope));
+          alert("warning", $scope.artist.name+' já existe!');
         } else {
-          Data.putArtist(clone($scope.artist));
+          Data.putArtist(angular.copy($scope.artist));
 
-          angular.element($("#alert-placeholder")).append($compile("<alert type='alert-success' message='"+$scope.artist.name+" adicionado com sucesso!'></alert>")($scope));
+          alert("success",$scope.artist.name + " adicionado com sucesso!");
 
           $scope.artist.name = "";
           $scope.artist.imagemSrc = "/images/blank_artist.png";

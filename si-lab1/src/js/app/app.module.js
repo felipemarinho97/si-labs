@@ -15,6 +15,9 @@ angular.module('musicoteca', [
   'artistGrid',
   'musicInput',
   'artistProfile',
-  'alert'
+  'alert',
+
+  'albumBox',
+  'albumGrid'
 
 ]);

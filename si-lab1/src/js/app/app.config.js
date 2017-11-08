@@ -31,7 +31,7 @@ angular.module('musicoteca').
               }).
               state("profile.albums", {
                 url: "/albums",
-                component: "artistInput"
+                component: "albumGrid"
               }).
               state("search", {
                     url: "/search",

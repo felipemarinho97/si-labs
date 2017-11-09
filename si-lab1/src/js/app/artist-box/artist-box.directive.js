@@ -17,6 +17,10 @@ angular.module('artistBox').
           }
         };
 
+        $(function () {
+          $('[data-toggle=confirmation]').confirmation();
+        });
+
         scope.favorite = function() {
           if (scope.artist.favorite == 0 || !scope.artist.favorite) {
             scope.artist.favorite = 1;
@@ -31,6 +35,7 @@ angular.module('artistBox').
         scope.artist.musicQtd = check(scope.artist.musicQtd, 0);
         scope.artist.albums = check(scope.artist.albums, {});
         scope.artist.albums.lenght = check(scope.artist.albums.lenght, 0);
+        // scope.albumsLenght = Data.queryAlbums();
       }
     }
   }])

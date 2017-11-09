@@ -225,8 +225,8 @@ component('artistGrid', {
         imageSrc: ""
       }
     ];
-    $scope.list = list;
-    // $scope.list = Data.queryArtists();
+    // $scope.list = list;
+    $scope.list = Data.queryArtists();
     $scope.limit = 20;
 
     $scope.onSearchChange = function() {

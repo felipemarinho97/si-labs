@@ -22,7 +22,7 @@ angular.module('musicoteca').
               }).
               state("profile", {
                   url: "/artist/:name",
-                  template: "<artist-profile></artist-profile>",
+                  component: "artistProfile",
                   resolve: {
                     artista: ($stateParams) => {
                       // recupera o artista $stateParams.name
@@ -30,8 +30,12 @@ angular.module('musicoteca').
                   }
               }).
               state("profile.albums", {
-                url: "/albums",
+                url: "",
                 component: "albumGrid"
+              }).
+              state("profile.music", {
+                url: "/:album",
+                template: "albumList"
               }).
               state("search", {
                     url: "/search",

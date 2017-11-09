@@ -1,5 +1,5 @@
 <div style="min-width: 12rem" class='card bg-dark text-white'>
-  <a ui-sref="profile.album({name: album.name})">
+  <a ui-sref="profile.music({name: album.name})">
     <img class='card-img' ng-src='{{album.imagemSrc}}'>
   </a>
   <div class='card-img-overlay'>
@@ -7,9 +7,10 @@
     <div class="float-left">
       <angular-rating-icons decimal="true" max="10" icon-size="20" color-base="orange" ng-model="album.classification"></angular-rating-icons>
     </div>
+        <div class="float-right">Loce</div>
     </div>
     <div class="card-header">
-    <h4 class='h4 card-title pt-2 text-center' ui-sref="profile({name: artist.name})">{{album.name}}</h4>
+    <a class='h4 card-title pt-2 text-center' ui-sref="profile.music({name: album.name})">{{album.name}}</a>
         </div>
   </div>
   </div>

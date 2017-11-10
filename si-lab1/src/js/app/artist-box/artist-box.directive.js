@@ -21,16 +21,6 @@ angular.module('artistBox').
           $('[data-toggle=confirmation]').confirmation();
         });
 
-        scope.favorite = function() {
-          if (scope.artist.favorite == 0 || !scope.artist.favorite) {
-            scope.artist.favorite = 1;
-          } else if (scope.artist.favorite == 1) {
-            scope.artist.favorite = 0;
-          } else {
-            scope.artist.favorite = 1;
-          }
-        }
-
         scope.artist.imagemSrc = check(scope.artist.imagemSrc, "/images/blank_artist.png");
         scope.artist.musicQtd = check(scope.artist.musicQtd, 0);
         scope.artist.albums = check(scope.artist.albums, {});

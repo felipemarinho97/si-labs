@@ -10,6 +10,7 @@ angular.module('musicoteca', [
 
   // interno
   'artistInput',
+  'playlistInput',
   'artistBox',
   'navBar',
   'artistGrid',
@@ -18,6 +19,7 @@ angular.module('musicoteca', [
   'alert',
 
   'albumBox',
-  'albumGrid'
+  'albumGrid',
+  'musicList'
 
 ]);

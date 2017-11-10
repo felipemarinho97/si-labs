@@ -12,12 +12,12 @@ angular.module('musicoteca').
                   url: "/",
                   component: "artistGrid"
               }).
-              state("artist", {
-                  url: "/artists",
+              state("addArtist", {
+                  url: "add/artists",
                   component: "artistInput"
               }).
-              state("music", {
-                  url: "/music",
+              state("addMusic", {
+                  url: "add/music",
                   template: "<music-input></music-input>"
               }).
               state("profile", {
@@ -33,12 +33,32 @@ angular.module('musicoteca').
                 url: "/albums",
                 component: "albumGrid"
               }).
+              state("addPlaylist", {
+                url: "add/playlist",
+                component: "playlistInput"
+              }).
+              state("profile.musicList", {
+                url: "/:albumName",
+                component: "musicList"
+              }).
               state("search", {
-                    url: "/search",
+                  url: "/search",
                   template: "<artist-grid></artist-grid>"
               }).
+              state("artist", {
+                  url: "/artist",
+                  component: "artistGrid"
+              }).
+              state("music", {
+                  url: "/music",
+                  component: "musicGrid"
+              }).
+              state("playlist", {
+                  url: "/playlist",
+                  component: "playlistGrid"
+              }).
               state("404", {
-                    url: "/404",
+                  url: "/404",
                   template: "Not Found"
               });
 

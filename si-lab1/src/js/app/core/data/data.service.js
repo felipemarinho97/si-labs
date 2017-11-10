@@ -3,6 +3,8 @@
 var data = angular.module('data');
 
 data.factory('Data', function($resource) {
+  var playlistList = {};
+
   var artistList = {
       "Jethro Tull": {
       name: "Jethro Tull",
@@ -115,6 +117,10 @@ data.factory('Data', function($resource) {
       return toArray(album.musics);
     },
 
+    queryPlaylists: function() {
+      return toArray(playlistList);
+    },
+
     getArtist: function(name) {
       return artistList[name];
     },
@@ -166,7 +172,23 @@ data.factory('Data', function($resource) {
       this.getAlbum(music.album, music.artist).musics[music.name] = music;
       this.getAlbum(music.album, music.artist).musics.lenght++;
       artistList[music.artist].musicQtd++;
+    },
+
+    getPlaylist: function(name) {
+      return playlistList[name];
+    },
+
+    putPlaylist: function(data) {
+      if (!playlistList[data.name]) {
+        playlistList[data.name] = data;
+      }
+    },
+
+    addMusic: function(playlistName, music) {
+      let playlist = this.getPlaylist(playlistName);
+      playlist.musics[music.name] = music;
     }
+
   }
 
 });

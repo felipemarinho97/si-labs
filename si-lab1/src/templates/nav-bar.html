@@ -45,6 +45,14 @@
   </button>
   <div class="collapse navbar-collapse" id="myCollapse">
     <ul class="navbar-nav">
+      <li class="nav-item dropdown px-2">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Adicionar</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" ui-sref="addArtist">Artistas</a>
+          <a class="dropdown-item" ui-sref="addMusic">Músicas</a>
+          <a class="dropdown-item" ui-sref="addPlaylist">Playlists</a>
+        </div>
+      </li>
       <li class="nav-item px-2" ng-repeat="item in items">
         <a class="nav-link" ui-sref="{{item.id}}" id="menuLinks">{{item.title}}</a>
       </li>

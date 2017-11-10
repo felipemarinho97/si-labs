@@ -53,16 +53,11 @@
 </style>
 
 <div class='card hoverable post-module'>
-  <a ui-sref="profile.albums({name: artist.name})">
+  <a>
     <div class="thumbnail"><img class='card-img-top' ng-src='{{artist.imagemSrc}}'><div>
   </a>
-  <div class="card-img-overlay clearfix">
-    <div class="float-right">
-    <a href="" class="text-center" title="If you like this, vote it up!" ng-click="favorite()">
-      <i class="fa fa-2x" ng-class="(artist.favorite==1) ? 'fa-heart' : 'fa-heart-o'"></i><br>
-    </a>
-  </div>
-  </div>
+  <a class="card-img-overlay clearfix" ui-sref="profile.albums({name: artist.name})">
+</a>
   <div class='card-block'>
     <h4 class='h4 card-title pt-2 text-center' ui-sref="profile({name: artist.name})">{{artist.name}}</h4>
     <!-- <h6 class='h6 px-2 card-description' ng-href="/artist/{{artist.name}}">

@@ -14,7 +14,7 @@
   <div class="card-columns">
     <div infinite-scroll="infiniteScroll()" infinite-scroll-distance="2">
       <div class="" ng-repeat="album in list  | filter: searchKeyword | orderBy:'name' | limitTo:limit">
-        <album-box album='album'></album-box>
+        <album-box ng-if="album.name" album='album'></album-box>
       </div>
     </div>
   </div>

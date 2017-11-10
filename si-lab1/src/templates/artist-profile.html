@@ -1,11 +1,32 @@
 <div class="container-flex">
 	<div class="row p-3">
 		<div class="col col-sm-2">
-		  <h1 class="h1">{{name}}</h1>
-      <angular-rating-icons decimal="true" max="10" icon-size="20" color-base="orange" ng-model="artist.classification"></angular-rating-icons>
-		  <img class='card-img-top' ng-src='{{artist.imagemSrc}}'</img>
+			<h1 class="h1">{{name}}</h1>
+			<angular-rating-icons decimal="true" max="10" icon-size="20" color-base="orange" ng-model="artist.classification"></angular-rating-icons>
+			<div class="float-right">
+				<a href="" class="text-center text-danger" title="If you like this, vote it up!" data-toggle="modal" data-target="#myModal">
+					<i class="fa fa-2x" ng-class="(artist.favorite==1) ? 'fa-heart' : 'fa-heart-o'"></i><br>
+				</a>
+			</div>
+			<img class='card-img-top' ng-src='{{artist.imagemSrc}}' </img>
 
 		</div>
 		<div class="col col-sm-10" ui-view></div>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h6 class="modal-title">
+					Adicionar {{name}} aos favoritos?
+				</h6>
+			</div>
+			<div class="modal-footer">
+				<button type="button" ng-click="favorite()" data-dismiss="modal" class="btn btn-success">Sim</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+			</div>
+		</div>
 	</div>
 </div>

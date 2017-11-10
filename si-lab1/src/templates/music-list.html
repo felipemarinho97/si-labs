@@ -1,0 +1,42 @@
+<style>
+  .btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+  }
+
+  .btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+  }
+</style>
+
+<div style="max-width: 15rem">
+  <album-box album='album'></album-box>
+</div>
+<div class="list-group p-2">
+  <div class="list-group-item list-group-item-action clearfix" ng-if="music.name" ng-repeat="music in musics">
+    {{music.name}} - {{music.artist}}
+    <div class="float-right">
+      <div class="dropdown">
+        <button type="button" id="playlistsAddButton" class="btn btn-info btn-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-plus"></i>
+        </button>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="playlistsAddButton">
+          <a class="dropdown-item" ng-repeat="playlist in playlists" href="#"><div ng-click="Data.addMusic(playlist.name, music)">{{playlist.name}}</div></a>
+          <div ng-if="playlists.length > 0" class="dropdown-divider"></div>
+          <a class="dropdown-item" ui-sref="playlist">Criar nova playlist</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

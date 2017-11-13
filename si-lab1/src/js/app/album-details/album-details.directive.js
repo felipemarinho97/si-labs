@@ -33,6 +33,10 @@ directive('albumDetails', ["LastFM", "Data", function(LastFM, Data) {
         })
         return (minSum + parseInt(secSum / 60)) + "min e " + (secSum % 60) + "seg" ;
       }
+
+      scope.listen = (music) => {
+        Data.setLastMusic(scope.album.artist, music);
+      }
     }
   }
 }])

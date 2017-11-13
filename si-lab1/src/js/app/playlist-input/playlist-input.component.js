@@ -29,13 +29,12 @@ angular.module('playlistInput').
       $scope.createNewPlaylist = function() {
         if (check($scope.playlist.name)) {
 
-        } else if (Data.getPlaylist($scope.playlist)) {
-          alert("warning", "Playlist já existe");
+        } else if (angular.isDefined(Data.getPlaylist($scope.playlist.name))) {
+          alert("warning", 'Playlist "' + $scope.playlist.name + '" já existe');
         } else {
-
           Data.putPlaylist(angular.copy($scope.playlist));
 
-          alert("success", "Playlist " + $scope.playlist.name + " adiconado!");
+          alert("success", 'Playlist "' + $scope.playlist.name + '" adiconada!');
         }
       }
     }

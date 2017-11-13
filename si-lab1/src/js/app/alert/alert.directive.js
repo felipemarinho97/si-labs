@@ -7,9 +7,6 @@ angular.module('alert').
         type: "@type",
         message: "@message"
       },
-      templateUrl: '/templates/alert.html',
-      link: function(scope, element, attr) {
-
-      }
+      templateUrl: '/templates/alert.html'
     }
   }])

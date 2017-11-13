@@ -4,25 +4,26 @@ angular.module('musicoteca').
     config(
         function(
           $stateProvider,
-          $urlRouterProvider
+          $urlRouterProvider,
+          LastFMProvider
           ){
-
+          LastFMProvider.setAPIKey('0d547efb363220e4b21702679dfe1607');
           $stateProvider.
               state("home", {
                   url: "/",
                   component: "artistGrid"
               }).
               state("addArtist", {
-                  url: "add/artists",
+                  url: "/add/artists",
                   component: "artistInput"
               }).
               state("addMusic", {
-                  url: "add/music",
-                  template: "<music-input></music-input>"
+                  url: "/add/music",
+                  component: "musicInput"
               }).
               state("profile", {
                   url: "/artist/:name",
-                  template: "<artist-profile></artist-profile>",
+                  component: "artistProfile",
                   resolve: {
                     artista: ($stateParams) => {
                       // recupera o artista $stateParams.name
@@ -34,7 +35,7 @@ angular.module('musicoteca').
                 component: "albumGrid"
               }).
               state("addPlaylist", {
-                url: "add/playlist",
+                url: "/add/playlist",
                 component: "playlistInput"
               }).
               state("profile.musicList", {
@@ -43,7 +44,7 @@ angular.module('musicoteca').
               }).
               state("search", {
                   url: "/search",
-                  template: "<artist-grid></artist-grid>"
+                  component: "artistGrid"
               }).
               state("artist", {
                   url: "/artist",
@@ -55,13 +56,13 @@ angular.module('musicoteca').
               }).
               state("playlist", {
                   url: "/playlist",
-                  component: "playlistGrid"
+                  component: "playlists"
               }).
               state("404", {
                   url: "/404",
                   template: "Not Found"
               });
 
-          // $urlRouterProvider.otherwise("/404");
+          $urlRouterProvider.otherwise("/");
 
 });

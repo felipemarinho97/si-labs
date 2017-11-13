@@ -2,99 +2,26 @@
 
 var data = angular.module('data');
 
-data.factory('Data', function($resource) {
+data.factory('Data', function($resource, $http) {
   var playlistList = {};
+  var artistList = {};
 
-  var artistList = {
-      "Jethro Tull": {
-      name: "Jethro Tull",
-      imagemSrc: "http://www.prog-sphere.com/wp-content/uploads/2017/05/Jethro-Tull.jpg",
-      albums: {
-        "Aqualung": {
-          name: "Aqualung",
-          artist: "Jethro Tull",
-          musics: {
-            "Aqualung": {
-              name: "Aqualung",
-              artist: "Jethro Tull",
-              album: "Aqualung",
-              anoDeLancamento: "02/02/169",
-              duracao: "600"
-            },
-            "Cross-Eyed Mary": {
-              name: "Cross-Eyed Mary",
-              artist: "Jethro Tull",
-              album: "Aqualung",
-              anoDeLancamento: "02/02/169",
-              duracao: "600"
-            },
-            "Cheap Day Return": {
-              name: "Cheap Day Return",
-              artist: "Jethro Tull",
-              album: "Aqualung",
-              anoDeLancamento: "02/02/169",
-              duracao: "600"
-            },
-            "Up To Me": {
-              name: "Up To Me",
-              artist: "Jethro Tull",
-              album: "Aqualung",
-              anoDeLancamento: "02/02/169",
-              duracao: "600"
-            },
-            "Hymn 43": {
-              name: "Hymn 43",
-              artist: "Jethro Tull",
-              album: "Aqualung",
-              anoDeLancamento: "02/02/169",
-              duracao: "600"
-            }
-          }
-        },
-        "Thick as a Brick": {
-          name: "Thick as a Brick",
-          artist: "Jethro Tull",
-          musics: {
-            "Thick as a Brick": {
-              name: "Thick as a Brick",
-              artist: "Jethro Tull",
-              album: "Thick as a Brick",
-              anoDeLancamento: "02/02/169",
-              duracao: "600"
-            }
-          }
-        },
-        lenght: 3
-      },
-      musicQtd: 15
-    },
-    "Pink Floyd": {
-      name: "Pink Floyd",
-      imagemSrc: "https://upload.wikimedia.org/wikipedia/en/d/d6/Pink_Floyd_-_all_members.jpg",
-      albums: {},
-      musicQtd: 0
-    }, "Serginho Groisman": {
-      name: "Serginho Groisman",
-      imagemSrc: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Serginho_Groisman_%282012%29_cropped.jpg",
-      albums: {},
-      musicQtd: 0
-    }, "Iron Maiden": {
-      name: "Iron Maiden",
-      imageSrc: "",
-      albums: {},
-      musicQtd: 0
-    }, "System of a Down": {
-      name: "System of a Down",
-      imageSrc: "",
-      albums: {},
-      musicQtd: 0
-    }, "Led Zeppelin": {
-      name: "Led Zeppelin",
-      imageSrc: "",
-      albums: {},
-      musicQtd: 0
-    }
-  };
+  /***** REQUESTS INTERNOS PARA FINS DE TESTE
+   * Pode ser comentado em caso de necessidade.
+   *****/
+  $http.get('/json/playlists.json')
+    .then((response) => {
+      playlistList = response.data;
+    }, () => {
+      playlistList = {}
+    });
+  $http.get('/json/artists.json')
+    .then((response) => {
+      artistList = response.data;
+    }, () => {
+      artistList = {}
+    });
+  /***** REQUESTS INTERNOS PARA FINS DE TESTE *****/
 
   var toArray = function(obj) {
     return $.map(obj, function(value, index) {
@@ -121,6 +48,10 @@ data.factory('Data', function($resource) {
       return toArray(playlistList);
     },
 
+    queryPlaylistMusics: function(playlistName) {
+      return toArray(playlistList[playlistName].musics);
+    },
+
     getArtist: function(name) {
       return artistList[name];
     },
@@ -142,7 +73,9 @@ data.factory('Data', function($resource) {
         this.putArtist({
           name: album.artist,
           imagemSrc: "",
-          albums: {lenght:0},
+          albums: {
+            lenght: 0
+          },
           musicQtd: 0
         })
       }
@@ -164,7 +97,9 @@ data.factory('Data', function($resource) {
         this.setAlbum({
           name: music.album,
           artist: music.artist,
-          musics: {lenght:0}
+          musics: {
+            lenght: 0
+          }
         });
       }
 
@@ -172,10 +107,13 @@ data.factory('Data', function($resource) {
       this.getAlbum(music.album, music.artist).musics[music.name] = music;
       this.getAlbum(music.album, music.artist).musics.lenght++;
       artistList[music.artist].musicQtd++;
+      artistList[music.artist].last = music;
     },
 
     getPlaylist: function(name) {
-      return playlistList[name];
+      if (playlistList[name]) {
+        return playlistList[name];
+      }
     },
 
     putPlaylist: function(data) {
@@ -184,9 +122,18 @@ data.factory('Data', function($resource) {
       }
     },
 
+    removePlaylist: function(playlistName) {
+      delete playlistList[playlistName];
+    },
+
     addMusic: function(playlistName, music) {
       let playlist = this.getPlaylist(playlistName);
       playlist.musics[music.name] = music;
+    },
+
+    removeMusic: function(playlistName, music) {
+      let playlist = this.getPlaylist(playlistName);
+      delete playlist.musics[music.name];
     }
 
   }

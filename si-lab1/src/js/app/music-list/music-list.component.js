@@ -3,11 +3,7 @@
 angular.module('musicList').
   component('musicList', {
     templateUrl: '/templates/music-list.html',
-    styleUrls: ['/css/artist-input.css'],
-    controller: function(Data, $scope, $stateParams, $compile) {
-
+    controller: function(Data, $scope, $stateParams) {
       $scope.album = Data.getAlbum($stateParams.albumName, $stateParams.name);
-      $scope.musics = Data.queryMusics($stateParams.name, $stateParams.albumName);
-      $scope.playlists = Data.queryPlaylists();
     }
   });

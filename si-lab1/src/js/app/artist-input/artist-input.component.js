@@ -4,16 +4,7 @@ angular.module('artistInput').
   component('artistInput', {
     templateUrl: '/templates/artist-input.html',
     styleUrls: ['/css/artist-input.component.css'],
-    controller: function(Data, $scope, $rootScope, $compile) {
-
-      function clone(obj) {
-          if (null == obj || "object" != typeof obj) return obj;
-          var copy = obj.constructor();
-          for (var attr in obj) {
-              if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-          }
-          return copy;
-      }
+    controller: function(Data, $scope, $compile) {
 
       $scope.artist = {
         name: "",

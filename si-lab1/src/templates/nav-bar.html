@@ -38,15 +38,23 @@
   }*/
 </style>
 
-<nav class="menu navbar sticky-top navbar-dark navbar-expand-sm">
-  <li class="navbar-brand" id="text-logo">Musicateca</li>
+<nav class="menu navbar navbar-dark navbar-expand-sm">
+  <li class="navbar-brand" ui-sref="favorite" id="text-logo">Musicateca</li>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myCollapse">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="myCollapse">
     <ul class="navbar-nav">
+      <li class="nav-item dropdown px-2">
+        <a class="nav-link dropdown-toggle" id="menuLinks" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Adicionar</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" ui-sref="addArtist">Artistas</a>
+          <a class="dropdown-item" ui-sref="addMusic">Músicas</a>
+          <a class="dropdown-item" ui-sref="addPlaylist">Playlists</a>
+        </div>
+      </li>
       <li class="nav-item px-2" ng-repeat="item in items">
-        <a class="nav-link" ng-href="/{{item.id}}" id="menuLinks">{{item.title}}</a>
+        <a class="nav-link" ui-sref="{{item.id}}" id="menuLinks">{{item.title}}</a>
       </li>
     </ul>
   </div>

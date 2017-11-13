@@ -2,8 +2,26 @@
 
 var data = angular.module('data');
 
-data.factory('Data', function($resource) {
+data.factory('Data', function($resource, $http) {
+  var playlistList = {};
   var artistList = {};
+
+  /***** REQUESTS INTERNOS PARA FINS DE TESTE
+   * Pode ser comentado em caso de necessidade.
+   *****/
+  $http.get('/json/playlists.json')
+    .then((response) => {
+      playlistList = response.data;
+    }, () => {
+      playlistList = {}
+    });
+  $http.get('/json/artists.json')
+    .then((response) => {
+      artistList = response.data;
+    }, () => {
+      artistList = {}
+    });
+  /***** REQUESTS INTERNOS PARA FINS DE TESTE *****/
 
   var toArray = function(obj) {
     return $.map(obj, function(value, index) {
@@ -24,6 +42,14 @@ data.factory('Data', function($resource) {
     queryMusics: function(artistName, albumName) {
       var album = this.getAlbum(albumName, artistName);
       return toArray(album.musics);
+    },
+
+    queryPlaylists: function() {
+      return toArray(playlistList);
+    },
+
+    queryPlaylistMusics: function(playlistName) {
+      return toArray(playlistList[playlistName].musics);
     },
 
     getArtist: function(name) {
@@ -47,7 +73,9 @@ data.factory('Data', function($resource) {
         this.putArtist({
           name: album.artist,
           imagemSrc: "",
-          albums: {lenght:0},
+          albums: {
+            lenght: 0
+          },
           musicQtd: 0
         })
       }
@@ -69,7 +97,9 @@ data.factory('Data', function($resource) {
         this.setAlbum({
           name: music.album,
           artist: music.artist,
-          musics: {lenght:0}
+          musics: {
+            lenght: 0
+          }
         });
       }
 
@@ -77,7 +107,35 @@ data.factory('Data', function($resource) {
       this.getAlbum(music.album, music.artist).musics[music.name] = music;
       this.getAlbum(music.album, music.artist).musics.lenght++;
       artistList[music.artist].musicQtd++;
+      artistList[music.artist].last = music;
+    },
+
+    getPlaylist: function(name) {
+      if (playlistList[name]) {
+        return playlistList[name];
+      }
+    },
+
+    putPlaylist: function(data) {
+      if (!playlistList[data.name]) {
+        playlistList[data.name] = data;
+      }
+    },
+
+    removePlaylist: function(playlistName) {
+      delete playlistList[playlistName];
+    },
+
+    addMusic: function(playlistName, music) {
+      let playlist = this.getPlaylist(playlistName);
+      playlist.musics[music.name] = music;
+    },
+
+    removeMusic: function(playlistName, music) {
+      let playlist = this.getPlaylist(playlistName);
+      delete playlist.musics[music.name];
     }
+
   }
 
 });

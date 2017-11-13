@@ -4,16 +4,7 @@ angular.module('artistInput').
   component('artistInput', {
     templateUrl: '/templates/artist-input.html',
     styleUrls: ['/css/artist-input.component.css'],
-    controller: function(Data, $scope, $rootScope) {
-
-      function clone(obj) {
-          if (null == obj || "object" != typeof obj) return obj;
-          var copy = obj.constructor();
-          for (var attr in obj) {
-              if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-          }
-          return copy;
-      }
+    controller: function(Data, $scope, $compile) {
 
       $scope.artist = {
         name: "",
@@ -26,15 +17,22 @@ angular.module('artistInput').
         $(element).hide();
       }
 
+      let alert = function(type, message) {
+        if ($("#alert-placeholder alert").length >= 3) {
+          $("#alert-placeholder alert").last().remove();
+        }
+        angular.element($("#alert-placeholder")).prepend($compile("<alert type='"+type+"' message='"+message+"'></alert>")($scope));
+      }
+
       $scope.createNewArtist = function() {
         if ($scope.artist.name === '') {
-          alert("Nome do artista obrigatório");
+          alert("danger", 'Nome do artista obrigatório!');
         } else if (Data.getArtist($scope.artist.name)) {
-          alert("Artista já existe");
+          alert("warning", $scope.artist.name+' já existe!');
         } else {
-          Data.putArtist(clone($scope.artist));
+          Data.putArtist(angular.copy($scope.artist));
 
-          $('#alert-placeholder').append('<div id="alertdiv" class="alert alert-success alert-dismissable" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span>'+$scope.artist.name+' adiciondo com sucesso!</span></div>');
+          alert("success",$scope.artist.name + " adicionado com sucesso!");
 
           $scope.artist.name = "";
           $scope.artist.imagemSrc = "/images/blank_artist.png";

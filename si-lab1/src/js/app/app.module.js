@@ -2,17 +2,26 @@
 
 angular.module('musicoteca', [
   // externo
-  'ngRoute',
   'ngResource',
+  'ui.router',
   'angular-rating-icons',
   'infinite-scroll',
+  'lastfm',
 
   // interno
   'artistInput',
+  'playlistInput',
   'artistBox',
   'navBar',
   'artistGrid',
   'musicInput',
-  'artistProfile'
+  'artistProfile',
+  'alert',
+  'albumBox',
+  'albumGrid',
+  'musicList',
+  'playlists',
+  'musicGrid',
+  'albumDetails'
 
 ]);

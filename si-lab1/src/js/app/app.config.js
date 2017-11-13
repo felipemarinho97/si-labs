@@ -3,28 +3,66 @@
 angular.module('musicoteca').
     config(
         function(
-          $locationProvider,
-          $routeProvider
+          $stateProvider,
+          $urlRouterProvider,
+          LastFMProvider
           ){
-          $locationProvider.html5Mode({
-              enabled:true
-            })
-
-          $routeProvider.
-              when("/artist", {
-                  template: "<artist-input></artist-input>"
+          LastFMProvider.setAPIKey('0d547efb363220e4b21702679dfe1607');
+          $stateProvider.
+              state("home", {
+                  url: "/",
+                  component: "artistGrid"
               }).
-              when("/music", {
-                  template: "<music-input></music-input>"
+              state("addArtist", {
+                  url: "/add/artists",
+                  component: "artistInput"
               }).
-              when("/artist/:name", {
-                  template: "<artist-profile></artist-profile>"
+              state("addMusic", {
+                  url: "/add/music",
+                  component: "musicInput"
               }).
-              when("/search", {
-                  template: "<artist-grid></artist-grid>"
+              state("profile", {
+                  url: "/artist/:name",
+                  component: "artistProfile",
+                  resolve: {
+                    artista: ($stateParams) => {
+                      // recupera o artista $stateParams.name
+                    }
+                  }
               }).
-              otherwise({
+              state("profile.albums", {
+                url: "/albums",
+                component: "albumGrid"
+              }).
+              state("addPlaylist", {
+                url: "/add/playlist",
+                component: "playlistInput"
+              }).
+              state("profile.musicList", {
+                url: "/:albumName",
+                component: "musicList"
+              }).
+              state("search", {
+                  url: "/search",
+                  component: "artistGrid"
+              }).
+              state("artist", {
+                  url: "/artist",
+                  component: "artistGrid"
+              }).
+              state("music", {
+                  url: "/music",
+                  component: "musicGrid"
+              }).
+              state("playlist", {
+                  url: "/playlist",
+                  component: "playlists"
+              }).
+              state("404", {
+                  url: "/404",
                   template: "Not Found"
-              })
+              });
+
+          $urlRouterProvider.otherwise("/");
 
 });

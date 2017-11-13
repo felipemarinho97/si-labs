@@ -1,3 +1,5 @@
+<link type="text/css" rel="stylesheet" href="./css/btn-circle.css">
+
 <div class="row clearfix">
   <div class="col m-2" style="max-width: {{maxSize ? maxSize : '15' }}rem">
     <album-box album='album'></album-box>
@@ -9,11 +11,14 @@
 </div>
 <div class="list-group p-2">
   <div class="list-group-item list-group-item-action clearfix" ng-if="music.name" ng-repeat="music in musics">
+    <button type="button" id="listenButton" ng-click="listen(music)" class="btn btn-success btn-sm btn-circle mx-1" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-play"></i>
+    </button>
     {{music.name}} -
     {{music.duracao}}
     <div class="float-right">
       <div class="dropdown">
-        <button type="button" id="playlistsAddButton" class="btn btn-info btn-sm btn-circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" id="playlistsAddButton" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-plus"></i>
         </button>
 

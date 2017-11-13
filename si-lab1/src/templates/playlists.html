@@ -47,7 +47,7 @@
         </div>
         <div class="collapse" id="collapse-{{$index}}">
           <div class="card-body">
-            <div ng-if="!playlist.musics">Playlist vazia.</div>
+            <div ng-if="vazia(playlist)">Playlist vazia.</div>
             <div class="list-group p-2">
               <div class="list-group-item list-group-item-action clearfix" ng-if="music.name" ng-repeat="music in playlist.musics">
                 {{music.name}} - {{music.artist}}

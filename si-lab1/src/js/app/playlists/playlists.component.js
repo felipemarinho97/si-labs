@@ -17,5 +17,9 @@ angular.module('playlists').
         $scope.playlists = Data.queryPlaylists();
       }
 
+      $scope.vazia = (playlist) => {
+        return Object.keys(playlist.musics).length == 0;
+      }
+
     }
   });

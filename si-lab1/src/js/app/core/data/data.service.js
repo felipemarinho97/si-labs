@@ -107,7 +107,6 @@ data.factory('Data', function($resource, $http) {
       this.getAlbum(music.album, music.artist).musics[music.name] = music;
       this.getAlbum(music.album, music.artist).musics.lenght++;
       artistList[music.artist].musicQtd++;
-      artistList[music.artist].last = music;
     },
 
     getPlaylist: function(name) {
@@ -134,6 +133,11 @@ data.factory('Data', function($resource, $http) {
     removeMusic: function(playlistName, music) {
       let playlist = this.getPlaylist(playlistName);
       delete playlist.musics[music.name];
+    },
+
+    setLastMusic: function(artistName, music) {
+      let artist = this.getArtist(artistName);
+      artist.last = music;
     }
 
   }

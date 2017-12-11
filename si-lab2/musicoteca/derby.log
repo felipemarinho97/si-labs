@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Dec 11 12:10:55 BRT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-0160-4620-fd08-000008101678 
+on database directory memory:/home/felipevm/Projetos/si-labs2/si-lab2/musicoteca/testdb with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/home/felipevm/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-b11
+user.dir=/home/felipevm/Projetos/si-labs2/si-lab2/musicoteca
+os.name=Linux
+os.arch=amd64
+os.version=4.8.0-52-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

@@ -3,11 +3,20 @@ package io.darklyn.musicoteca.music;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Album {
+	@Id @GeneratedValue
+	private Integer Id;
 	private String name;
 	private String artist;
 	private String releaseYear;
 	
+	@OneToMany
 	private Map<String, Music> tracks;
 	
 	public Album(String name, String artist) {

@@ -8,25 +8,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.darklyn.musicoteca.exceptions.ConflictException;
+import io.darklyn.musicoteca.exceptions.MusicNotFoundException;
 import io.darklyn.musicoteca.exceptions.PlaylistNotFoundException;
 import io.darklyn.musicoteca.music.Music;
+import io.darklyn.musicoteca.music.MusicRepository;
 
 @Service
 public class PlaylistsService {
 	
 	@Autowired
 	private PlaylistReporitory playlistRepository;
+	@Autowired
+	private MusicRepository musicRepository;
 	
-	public Playlist addPlaylist(String name) {
-		if (!playlistRepository.existsByName(name)) {
-			return playlistRepository.save(new Playlist(name));
+	public Playlist addPlaylist(String username, String name) {
+		if (!playlistRepository.existsByNameAndUsername(name, username)) {
+			return playlistRepository.save(new Playlist(username, name));
 		} else {
 			throw new ConflictException("Playlist já existe");
 		}
 	}
 	
-	public Playlist getPlaylist(String name) {
-		Playlist p = playlistRepository.findByName(name);
+	public void deletePlaylist(Integer id) {
+		if (playlistRepository.exists(id)) {
+			playlistRepository.delete(id);
+		} else {
+			throw new PlaylistNotFoundException("Playlist inexistente");
+		}
+	}
+	
+	public Playlist getPlaylist(String name, String username) {
+		Playlist p = playlistRepository.findOneByNameAndUsername(name, username);
 		
 		if (p == null) {
 			throw new PlaylistNotFoundException("Playlist inexistente");
@@ -35,21 +47,41 @@ public class PlaylistsService {
 		return p;
 	}
 
-	public List<Playlist> getAllPlaylists() {
-		List<Playlist> l = new ArrayList<Playlist>();
+	private Playlist getPlaylist(Integer id) {
+		Playlist p = playlistRepository.findOne(id);
 		
-		Iterable<Playlist> i = playlistRepository.findAll();
-		i.forEach(l::add);
+		if (p == null) {
+			throw new PlaylistNotFoundException("Playlist inexistente");
+		}
 		
-		return l;
+		return p;
+	}
+	
+	public List<Playlist> getAllPlaylists(String username) {
+		List<Playlist> list = new ArrayList<Playlist>();
+		
+		Iterable<Playlist> iterable = playlistRepository.findByUsername(username);
+		iterable.forEach(list::add);
+		
+		return list;
 	}
 
-	public void addMusic(String nome, Music music) {
-		Playlist p = this.getPlaylist(nome);
+	public void addMusic(String username, Integer id, Integer musicId) {
+		Playlist p = this.getPlaylist(id);
 		
-		p.putMusic(music);
-		
-		playlistRepository.save(p);		
+		Music m = musicRepository.findOne(musicId);
+		if (!p.getMusicList().contains(m)) {
+			p.putMusic(m);
+			
+			playlistRepository.save(p);	
+		}
+	
+	}
+	
+	public void deleteMusic(Integer id, Integer musicId) {
+		Playlist p = this.getPlaylist(id);
+		p.removeMusic(musicId);
+		playlistRepository.save(p);
 	}
 
 }

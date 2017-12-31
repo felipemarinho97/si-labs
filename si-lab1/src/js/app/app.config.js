@@ -3,10 +3,10 @@
 angular.module('musicoteca').
     config(
         function(
-          $stateProvider,
-          $urlRouterProvider,
-          LastFMProvider
-          ){
+              $stateProvider,
+              $urlRouterProvider,
+              LastFMProvider
+          ) {
           LastFMProvider.setAPIKey('0d547efb363220e4b21702679dfe1607');
           $stateProvider.
               state("home", {
@@ -40,7 +40,10 @@ angular.module('musicoteca').
               }).
               state("profile.musicList", {
                 url: "/:albumName",
-                component: "musicList"
+                component: "musicList",
+                resolve: {
+                  album: ($stateParams) => {return {"name": $stateParams.albumName, "artist": $stateParams.name}}
+                }
               }).
               state("search", {
                   url: "/search",
@@ -57,6 +60,14 @@ angular.module('musicoteca').
               state("playlist", {
                   url: "/playlist",
                   component: "playlists"
+              }).
+              state("login",{
+                  url: "/login",
+                  component: "login"
+              }).
+              state("register",{
+                  url: "/register",
+                  component: "register"
               }).
               state("404", {
                   url: "/404",

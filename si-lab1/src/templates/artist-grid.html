@@ -73,7 +73,7 @@
 
   <div class="card-columns">
     <div infinite-scroll="infiniteScroll()" infinite-scroll-distance="2">
-      <div class="" ng-repeat="artist in list  | filter: searchKeyword | orderBy:'name' | limitTo:limit">
+      <div class="" ng-repeat="artist in list  | filter: searchKeyword | orderBy:['!favorite','name'] | limitTo:limit">
         <artist-box artist='artist'></artist-box>
       </div>
     </div>

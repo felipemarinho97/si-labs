@@ -75,11 +75,11 @@
 
     <div class="card-footer clearfix">
       <div class="float-right">
-        <angular-rating-icons decimal="true" max="10" icon-size="20" color-base="orange" ng-model="artist.classification"></angular-rating-icons>
+        <angular-rating-icons decimal="true" max="10" icon-size="20" color-base="orange" ng-click="updateClassification()" ng-model="artist.classification"></angular-rating-icons>
       </div>
       <div class="float-left">
-        <i class="fa fa-music"></i> {{artist.musicQtd}}
-        <i class="fa fa-dot-circle-o"></i> {{artist.albums.lenght}}
+        <i class="fa fa-music"></i> {{musicQtd()}}
+        <i class="fa fa-dot-circle-o"></i> {{artist.albums.length}}
       </div>
     </div>
   </div>

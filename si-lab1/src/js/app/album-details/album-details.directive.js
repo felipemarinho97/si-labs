@@ -10,23 +10,12 @@ directive('albumDetails', ["LastFM", "Data", function(LastFM, Data) {
     templateUrl: '/templates/album-details.html',
     link: function(scope, element, attr, ctrl) {
 
-      scope.musics = Data.queryMusics(scope.album.artist, scope.album.name);
-      scope.playlists = Data.queryPlaylists();
-
-      scope.addMusic = function(playlistName, music) {
-        return Data.addMusic(playlistName, music);
-      }
-
-      scope.albumLength = function() {
-        return Object.keys(scope.album.musics).length-1;
-      }
-
-      scope.albumDuraction = function() {
+      let calcAlbumDuraction = function() {
         var minSum = 0;
         var secSum = 0;
         scope.musics.forEach(function(music) {
-          if (angular.isDefined(music.duracao)) {
-            let arr = music.duracao.split(":");
+          if (angular.isDefined(music.length)) {
+            let arr = music.length.split(":");
             minSum += parseInt(arr[0]);
             secSum += parseInt(arr[1]);
           }
@@ -34,8 +23,25 @@ directive('albumDetails', ["LastFM", "Data", function(LastFM, Data) {
         return (minSum + parseInt(secSum / 60)) + "min e " + (secSum % 60) + "seg" ;
       }
 
+      Data.getAlbum(scope.album.name, scope.album.artist).then((response) => {
+        scope.album = response.data;
+        scope.musics = response.data.musics;
+        scope.albumLength = scope.musics.length;
+        scope.albumDuraction = calcAlbumDuraction();
+      })
+
+      Data.queryPlaylists().then((response) => {
+        scope.playlists = response.data;
+      });
+
+
+      scope.addMusic = function(playlist, music) {
+        return Data.addMusic(playlist.id, music);
+      }
+
+
       scope.listen = (music) => {
-        Data.setLastMusic(scope.album.artist, music);
+        Data.setLastMusic(music);
       }
     }
   }

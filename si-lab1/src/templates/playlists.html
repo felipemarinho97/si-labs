@@ -35,7 +35,7 @@
               				</h6>
               			</div>
               			<div class="modal-footer">
-              				<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="removePlaylist(playlist.name)">Sim</button>
+              				<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="removePlaylist(playlist.id)">Sim</button>
               				<button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
               			</div>
               		</div>
@@ -49,11 +49,11 @@
           <div class="card-body">
             <div ng-if="vazia(playlist)">Playlist vazia.</div>
             <div class="list-group p-2">
-              <div class="list-group-item list-group-item-action clearfix" ng-if="music.name" ng-repeat="music in playlist.musics">
+              <div class="list-group-item list-group-item-action clearfix" ng-if="music.name" ng-repeat="music in playlist.musicList">
                 {{music.name}} - {{music.artist}}
 
                 <div class="float-right">
-                  <button type="button" id="playlistsRemoveButton" ng-click="removeMusic(playlist.name, music)" class="btn btn-danger btn-circle" aria-haspopup="true" aria-expanded="false">
+                  <button type="button" id="playlistsRemoveButton" ng-click="removeMusic(playlist.id, music.id)" class="btn btn-danger btn-circle" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-minus"></i>
                   </button>
                 </div>

@@ -5,7 +5,12 @@ component('artistGrid', {
   templateUrl: '/templates/artist-grid.html',
   controller: function(Data, $scope) {
 
-    $scope.list = Data.queryArtists();
+    Data.queryArtists().then((response) => {
+      $scope.list = response.data;
+    }).catch(() => {
+      $scope.list = [];
+      console.log("Não foi possível recuperar os artistas.")
+    })
     $scope.limit = 20;
 
     $scope.onSearchChange = function() {
